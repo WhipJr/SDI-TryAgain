@@ -66,18 +66,24 @@ function askUser(){
 
 function startGame(gameNum)
 {
-	console.log("Loading game: " + gameList[gameNum] + " Please wait.")	
+	console.log("Loading game: " + gameList[gameNum-1] + " Please wait.")	
 	var i = 0;
-	while (i < 5) {
+	while (i < 7) {
 		load(5);
-		console.log(".....");
+		if(i==1){console.log(".");}
+		if(i==2){console.log("..");}
+		if(i==3){console.log("...");}
+		if(i==4){console.log("....");}
+		if(i==5){console.log(".....");}
 		i++;
 	}
 
-	console.log("Your Game could not load, please check your game disk or redownload your digital copy of the game.")
+	console.log("Your Game could not load, please check your game disk or redownload your digital copy of the game.");
+	end();
 }
 
 
+//call to temporarily pause script for x amount of seconds.
 function load(seconds) {
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
