@@ -1,5 +1,7 @@
 /*
  * Assignment: Project 2
+ * 
+ * GitHub Repo URL: https://github.com/WhipJr/SDI-TryAgain
  */
 console.log("Start!");
 
