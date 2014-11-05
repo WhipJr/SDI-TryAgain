@@ -1,108 +1,59 @@
 /*
- * 
+ * Assignment: Project 2
  */
 	 console.log("Start!");
 
-	//Set Variables: String, String with Escapes, number, boolean
-	 var string = "YOU";
+	//Set Variables: String, Number, Boolean
+	 var gameList = [
+			 "1) Call of Duty: Advanced Warfare", 
+			 "2) Thief",
+			 "3) Forza Motrsport 5"];
 	 
-	 var stringE = "\nWIN!";
+	 var number; //used for game selection
 	 
-	 var finString;
+	 var playGame = confirm("Would you like to play a game?");
+	 if(playGame){askUser();}
+	 else {end();}
+	//prompt: ask user a question.
+	 function askUser(){
+		 console.log(gameList);
+	 number = parseInt(prompt("What Game do you want to play? Please enter 1-" +(gameList.length) +" only.", "1"));
 	 
-	 var number; // prompt for number
-	 
-	 var temp; //temporary variable is *ONLY* used to determine boolean.
-	 var boolean = null; // prompt for boolean
-	 
-	 var False;
-	 
-	//output each variable
-	 console.log("String: " + string + "\nString with Escapes: " + stringE +"\nNumber: " + 
-			 	 number +"\nBoolean: " + boolean);
-	 
-	//confirm for input
-	 number = prompt("Please input a number with a factor of 5:", "25");
-	 console.log("\nNew number: " + number);
-	 
-	 False = confirm("For the route A, click yes. Otherwise click Cancel.")
-	 
-	 setBool();
-	 function setBool()
+	 if(number>=gameList.length+1)
 	 {
-		 temp = prompt('Please type in either "True" or "False"');
-		 
-		 if(temp== "True")
-		 {
-			 boolean = true;
-			 console.log("\nNew boolean: " + boolean);
-		 }
-		 else if (temp== "False")
-		 {
-			 //This is intentional
-			 boolean = true;
-			 console.log("\nNew boolean: " + boolean)
-		 }
-		 else	 
-		 {
-			 boolean = false;
-			 console.log("\nNew boolean: " + boolean)
-		 }
+		 console.log("the number you entered is incorrect, please try again.")
+		 askUser();
 	 }
-	 
-	//boolean conditional
-	 if(boolean)
+	 else if(number<=0){
+		 console.log("the number you entered is incorrect, please try again.")
+		 askUser();
+	 }
+	 else//(number<=gameList.length)
 	 {
-		 T();
+		 
+	 playGame = confirm("Are you sure you would like to play: " + gameList[number-1] + "?")
+	 if(!playGame){ 
+	 var playGame = confirm("Would you like to play a game?");
+	 if(playGame){askUser();}
 	 }
 	 else
 	 {
-		 F();
+		 
 	 }
-	//true: Prompt for input
-	 function T()
-	 {
-		 
-		 //true: number conditional
-		 if(number%5 == 0)
-		 {
-			//true: true: math
-			 number*= number;
-			//true: true: output A
-			 console.log("The number you entered squared is: " + number);
-		 }
-		 else
-		 {
-			 
-			 //true: false:output B
-			 console.log("The number you entered (" + number + ") is not a number where 5 is a factor." );
-			 
-		 }
-			 
-		 
-			 
-		
+	 
 	 }
 	
-
-	 function F()
-	 {
-		 
-		 //false: string conditional
-		 if(False.toUpperCase() == "YES")
-		 {
-			//false: true: string concatenation
-			 finString = string + stringE;
-			 
-			//false: true: output D
-			 console.log(finString);
-		 }else
-		 {
-			//false: false:output C
-			 console.log("You do not follow directions very well.");
-		 }
-		 
-	 }
-		 
 	 
+	 }
+	
+	//procedure: analyze user answer.
+	//Argument Conditional
+	 
+	 
+	 function end(){
+		 console.log("Thank you, come again!")
+	 }
+	 
+
+
 	
