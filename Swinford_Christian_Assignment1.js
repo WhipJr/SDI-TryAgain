@@ -6,10 +6,13 @@
 console.log("Start!");
 
 //Set Variables: String, Number, Boolean
-var gameList = [
+/*var gameList = [
                 "1) Call of Duty: Advanced Warfare", 
                 "2) Thief",
                 "3) Forza Motrsport 5"];
+*/
+var gameList = function (json){};
+gameList(json);
 
 var number; //used for game selection
 
@@ -84,10 +87,10 @@ function startGame(gameNum)
 		if(i==4){console.log("....");}
 		if(i==5){console.log(".....");}
 		i++;
-	}
-
+	}else{
 	console.log("Your Game could not load, please check your game disk or redownload your digital copy of the game.");
 	end();
+	}
 }
 
 
