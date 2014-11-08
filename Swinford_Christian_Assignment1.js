@@ -16,6 +16,7 @@ var gameList = json.Games;
 
 var number; //used for game selection
 
+var checked = false;
 var canPlay = true;
 
 var playGame = confirm("Would you like to play a game?");
@@ -28,6 +29,7 @@ else{
 //prompt: ask user which game to play.
 function askUser(){
 	//console.log(gameList);
+	checked = false;
 	for(var i = 0; i<gameList.length; i++){
 		console.log(gameList[i].Number + ")\t" + gameList[i].Name);
 	}
@@ -44,18 +46,46 @@ function askUser(){
 		console.log("the number you entered is incorrect, please try again.")
 		askUser();
 	}
-	
-	else//if neither of those occurred, continue to prompt confirmation of the correct game.
-	{
+	else if(!checked){
 		canPlay = playable(number);
 		//console.log(canPlay);
 		if(!canPlay){
-			console.log("The game you have selected is either not released yet, ir is still being dowloaded. Please select a different game.")
+			console.log("The game you have selected is either not released yet, or is still being dowloaded. Please select a different game.")
+			askUser();
+		}else{
+		checked = true;
+		play();
+		}
+	}
+	else//if neither of those occurred, continue to prompt confirmation of the correct game.
+	{
+		play();
+	}
+		
+
+
+}
+
+function play(){
+
+	playGame = confirm("Are you sure you would like to play: \n" + gameList[number-1].Name + "?")
+	//if user does not want to play the selected game, restart the process.
+	if(!playGame){ 
+		playGame = confirm("Would you like to play a game?");
+		if(playGame){
 			askUser();
 		}
-		playGame = confirm("Are you sure you would like to play: \n" + gameList[number-1].Name + "?")
-		//if user does not want to play the selected game, restart the process.
-		if(!playGame){ 
+		else{
+			end();
+		}
+	}
+	else
+	{
+		playGame = confirm("Please wait while the game is loading " + sizeConversion(gameList[number-1].Size) + " GB of data.")
+		if(playGame){
+			startGame(number);
+		}
+		else{
 			playGame = confirm("Would you like to play a game?");
 			if(playGame){
 				askUser();
@@ -64,29 +94,11 @@ function askUser(){
 				end();
 			}
 		}
-		else
-		{
-			playGame = confirm("Please wait while the game is loading " + sizeConversion(gameList[number-1].Size) + " GB of data.")
-			if(playGame){
-				startGame(number);
-			}
-			else{
-				playGame = confirm("Would you like to play a game?");
-				if(playGame){
-					askUser();
-				}
-				else{
-					end();
-				}
-			}
-
-		}
 
 	}
 
 
 }
-
 function startGame(gameNum)
 {
 	console.log("Loading game: " + gameList[gameNum-1].Name + " Please wait.")	
