@@ -11,10 +11,12 @@ console.log("Start!");
                 "2) Thief",
                 "3) Forza Motrsport 5"];
 */
-var gameList = function (json){};
-gameList(json);
+var gameList = json.Games;
+//gameList(json);
 
 var number; //used for game selection
+
+var canPlay = true;
 
 var playGame = confirm("Would you like to play a game?");
 if(playGame){
@@ -25,8 +27,12 @@ else{
 }
 //prompt: ask user which game to play.
 function askUser(){
-	console.log(gameList);
-	number = parseInt(prompt("What Game do you want to play? Please enter 1-" +(gameList.length) +" only.", "1"));
+	//console.log(gameList);
+	for(var i = 0; i<gameList.length; i++){
+		console.log(gameList[i].Number + ")\t" + gameList[i].Name);
+	}
+	
+	number = parseInt(prompt("What Game do you want to play? Please enter 1-" +(json.Games.length) +" only.", "1"));
 	//check to see if the user selected a number greater than the allowed number of games
 	if(number>=gameList.length+1)
 	{
@@ -38,10 +44,16 @@ function askUser(){
 		console.log("the number you entered is incorrect, please try again.")
 		askUser();
 	}
-	//if neither of those occurred, continue to prompt confirmation of the correct game.
-	else
+	
+	else//if neither of those occurred, continue to prompt confirmation of the correct game.
 	{
-		playGame = confirm("Are you sure you would like to play: \n" + gameList[number-1] + "?")
+		canPlay = playable(number);
+		//console.log(canPlay);
+		if(!canPlay){
+			console.log("The game you have selected is either not released yet, ir is still being dowloaded. Please select a different game.")
+			askUser();
+		}
+		playGame = confirm("Are you sure you would like to play: \n" + gameList[number-1].Name + "?")
 		//if user does not want to play the selected game, restart the process.
 		if(!playGame){ 
 			playGame = confirm("Would you like to play a game?");
@@ -54,7 +66,7 @@ function askUser(){
 		}
 		else
 		{
-			playGame = confirm("Please wait while the game is loading.")
+			playGame = confirm("Please wait while the game is loading " + sizeConversion(gameList[number-1].Size) + " GB of data.")
 			if(playGame){
 				startGame(number);
 			}
@@ -77,7 +89,7 @@ function askUser(){
 
 function startGame(gameNum)
 {
-	console.log("Loading game: " + gameList[gameNum-1] + " Please wait.")	
+	console.log("Loading game: " + gameList[gameNum-1].Name + " Please wait.")	
 	var i = 0;
 	while (i < 7) {
 		load(5);
@@ -87,10 +99,20 @@ function startGame(gameNum)
 		if(i==4){console.log("....");}
 		if(i==5){console.log(".....");}
 		i++;
-	}else{
+	}
 	console.log("Your Game could not load, please check your game disk or redownload your digital copy of the game.");
 	end();
-	}
+	
+}
+
+function playable(num)
+{
+	//console.log(gameList[num-1].Playable);
+	return gameList[number-1].Playable;	
+}
+
+function sizeConversion(MB){
+	return MB/1024;
 }
 
 
