@@ -2,7 +2,9 @@
 Christian Swinford
 
 Term 1409 SDI
-09/25/2014
+11/20/2014
+
+I would like to make up any possible points with everything I have done in this single script. pease and thank you.
 
  */
 start();
@@ -131,10 +133,15 @@ function firstWordCap(){
 //separator changed to the second: "a,b,c" + "," + "/" → "a/b/c". 
 //#5//
 function changeDelimiter(){
-	var str = prompt("Please enter a string of words and numbers with a delimiter of ','","e, x, a, m, p, l, e, 1, 2, 3")
-	var newStr = str.replace(/,/g, "/");
+	var text = prompt("Please enter a string of words and numbers with a delimiter of ','","e, x, a, m, p, l, e, 1, 2, 3")
+	
+	for (var i = 0, len = text.length; i < len; i++) {
+		if(text[i] == ","){
+			text[i] = "/";}
 
-	console.log(newStr);
+	}
+
+	console.log(text);
 	start();
 }
 
