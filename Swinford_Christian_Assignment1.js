@@ -6,13 +6,9 @@
 console.log("Start!");
 
 //Set Variables: String, Number, Boolean
-/*var gameList = [
-                "1) Call of Duty: Advanced Warfare", 
-                "2) Thief",
-                "3) Forza Motrsport 5"];
-*/
+
 var gameList = json.Games;
-//gameList(json);
+
 
 var number; //used for game selection
 
@@ -33,7 +29,7 @@ function askUser(){
 	for(var i = 0; i<gameList.length; i++){
 		console.log(gameList[i].Number + ")\t" + gameList[i].Name);
 	}
-	
+
 	number = parseInt(prompt("What Game do you want to play? Please enter 1-" +(json.Games.length) +" only.", "1"));
 	//check to see if the user selected a number greater than the allowed number of games
 	if(number>=gameList.length+1)
@@ -53,15 +49,15 @@ function askUser(){
 			console.log("The game you have selected is either not released yet, or is still being dowloaded. Please select a different game.")
 			askUser();
 		}else{
-		checked = true;
-		play();
+			checked = true;
+			play();
 		}
 	}
 	else//if neither of those occurred, continue to prompt confirmation of the correct game.
 	{
 		play();
 	}
-		
+
 
 
 }
@@ -101,20 +97,20 @@ function play(){
 }
 function startGame(gameNum)
 {
-	console.log("Loading game: " + gameList[gameNum-1].Name + " Please wait.")	
+	console.log("Loading game: " + gameList[gameNum-1].Name + ", Please wait.")	
 	var i = 0;
 	while (i < 7) {
 		load(5);
-		if(i==1){console.log(".");}
-		if(i==2){console.log("..");}
-		if(i==3){console.log("...");}
-		if(i==4){console.log("....");}
+		if(i==1){console.log(".");}else
+		if(i==2){console.log("..");}else
+		if(i==3){console.log("...");}else
+		if(i==4){console.log("....");}else
 		if(i==5){console.log(".....");}
 		i++;
 	}
 	console.log("Your Game could not load, please check your game disk or redownload your digital copy of the game.");
 	end();
-	
+
 }
 
 function playable(num)
@@ -134,7 +130,7 @@ function load(seconds) {
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
 		//take current time and find the difference from now and when function started
-		if ((new Date().getTime() - start) > (seconds+1000)){
+		if ((new Date().getTime() - start) > (seconds*1000)){
 			break;
 		}
 	}
